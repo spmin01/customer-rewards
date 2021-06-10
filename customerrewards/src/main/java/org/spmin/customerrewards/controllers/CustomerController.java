@@ -21,6 +21,14 @@ public class CustomerController {
     @Autowired
     TransactionRepository transactionRepository;
 
+
+    @GetMapping
+    public ResponseEntity<?> getCustomers() {
+
+        //TODO: this doesn't need to return everything, just firstName, lastName, id
+        return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
+    }
+
     // Takes randomly generated customer data as input to populate database
     @PostMapping()
     public ResponseEntity<?> postCustomers(@RequestBody List<Customer> customers) {
