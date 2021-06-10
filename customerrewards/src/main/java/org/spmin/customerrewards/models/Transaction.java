@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 public class Transaction extends AbstractEntity {
 
     private double transactionAmount;
-    private String dateAndTime; // TODO: investigate making this into a more complex data type
+    private String transactionDate; // TODO: investigate making this into a more complex data type
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
@@ -24,12 +24,12 @@ public class Transaction extends AbstractEntity {
         this.transactionAmount = transactionAmount;
     }
 
-    public String getDateAndTime() {
-        return dateAndTime;
+    public String getTransactionDate() {
+        return transactionDate;
     }
 
-    public void setDateAndTime(String dateAndTime) {
-        this.dateAndTime = dateAndTime;
+    public void setTransactionDate(String transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
     public Customer getCustomer() {

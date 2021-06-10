@@ -2,7 +2,9 @@ package org.spmin.customerrewards.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +16,8 @@ public class Customer extends AbstractEntity {
     private int rewardsPoints;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Transaction> customerTransactions;
+    @JoinColumn(name="customer_id")
+    private List<Transaction> transactions = new ArrayList<>();
 
     public Customer() {
         this.rewardsPoints = 0;
@@ -44,11 +47,11 @@ public class Customer extends AbstractEntity {
         this.rewardsPoints = rewardsPoints;
     }
 
-    public List<Transaction> getCustomerTransactions() {
-        return customerTransactions;
+    public List<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setCustomerTransactions(List<Transaction> customerTransactions) {
-        this.customerTransactions = customerTransactions;
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }
