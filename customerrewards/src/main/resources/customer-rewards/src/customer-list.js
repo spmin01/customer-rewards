@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DataGenerator from './data-generator';
 
 
 class CustomerList extends React.Component {
@@ -17,10 +18,12 @@ class CustomerList extends React.Component {
             .then(res => res.json())
             .then(
                 (result) => {
+
                     this.setState({
                         isLoaded: true,
-                        items: result.customers
+                        customers: result
                     });
+
                 },
                 (error) => {
                     this.setState({
@@ -35,10 +38,16 @@ class CustomerList extends React.Component {
         const { error, isLoaded, customers } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
-        } else if(!isLoaded) {
+        } else if (!isLoaded) {
             return <div>Loading...</div>
-        } else {
-            return(
+        } else if (customers.length === 0) {
+            return <div>
+                <p>Customer data appears to be empty</p>
+                <DataGenerator />
+            </div>
+        }
+        else {
+            return (
                 <ul>
                     {customers.map(customer => (
                         <li key={customer.id}>

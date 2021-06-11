@@ -1,10 +1,50 @@
-let faker = require('faker');
-let fs = require('fs');
+import React, { Component } from 'react';
+const faker = require('faker');
 
+
+class GenerateData extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+
+    handleClick() {
+        let customerList = [];
+
+        // generates 10 customers, might set to some level of randomiztaion later
+        for (let i = 0; i < 10; i++) {
+            customerList.push(generateCustomer());
+        }
+
+        fetch("http://localhost:8080/api/customer", {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(customerList)
+        }).then(function(res) 
+        {
+            window.location.reload(true); // refresh the page to grab generated data back from the server
+        });
+
+    }
+
+
+    render() {
+        return (
+            <button onClick={this.handleClick}>
+                Generate Some?
+            </button>
+        )
+    }
+
+}
 
 // creates a new customer with firstName, lastName as strings and transactions as array
-function generateCustomer()
-{
+function generateCustomer() {
 
     // generate the customers name
     let firstName = faker.name.firstName();
@@ -14,7 +54,7 @@ function generateCustomer()
     let transactions = [];
     let numTransactions = Math.random() * 10 + 1;
 
-    for(let i = 0; i < numTransactions; i++) {
+    for (let i = 0; i < numTransactions; i++) {
         transactions.push(generateTransaction());
     }
 
@@ -26,8 +66,7 @@ function generateCustomer()
     };
 }
 
-function generateTransaction()
-{
+function generateTransaction() {
     let transactionAmount = faker.finance.amount();
     let transactionDate = faker.date.recent(90);
 
@@ -37,15 +76,4 @@ function generateTransaction()
     };
 }
 
-
-let customerList = [];
-
-for(let i = 0; i < 10; i++) {
-    customerList.push(generateCustomer());
-}
-
-
-fs.appendFile('customers.json', JSON.stringify(customerList), function (err) {
-    if (err) throw err;
-    console.log("Saved!");
-});
+export default GenerateData;
