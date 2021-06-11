@@ -16,7 +16,7 @@ public class PointsService {
         List<Transaction> transactionList = customer.getTransactions();
 
         for (Transaction transaction : transactionList) {
-            double transactionAmt = transaction.getTransactionAmount();
+            double transactionAmt = Math.floor(transaction.getTransactionAmount());
 
             if (transactionAmt > 100) {
                 pointsTotal += 50 + 2 * (transactionAmt - 100);

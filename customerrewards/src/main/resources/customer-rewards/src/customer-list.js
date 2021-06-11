@@ -51,7 +51,7 @@ class CustomerList extends React.Component {
                 <ul>
                     {customers.map(customer => (
                         <li key={customer.id}>
-                            {customer.firstName} {customer.lastName}
+                            {customer.firstName} {customer.lastName} Points: {customer.rewardsPoints}
                         </li>
                     ))}
                 </ul>
