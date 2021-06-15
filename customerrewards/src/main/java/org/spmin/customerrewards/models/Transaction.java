@@ -11,6 +11,7 @@ public class Transaction extends AbstractEntity {
 
     private double transactionAmount;
     private String transactionDate; // TODO: investigate making this into a more complex data type
+    private int transactionPoints;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
@@ -28,8 +29,18 @@ public class Transaction extends AbstractEntity {
         return transactionDate;
     }
 
+    public int getTransactionPoints() {
+        return transactionPoints;
+    }
+
+    public void setTransactionPoints(int transactionPoints) {
+        this.transactionPoints = transactionPoints;
+    }
+
     public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
+
+
     }
 
     public Customer getCustomer() {

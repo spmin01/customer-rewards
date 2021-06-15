@@ -1,6 +1,7 @@
 package org.spmin.customerrewards.controllers;
 
 import org.spmin.customerrewards.models.Customer;
+import org.spmin.customerrewards.models.Transaction;
 import org.spmin.customerrewards.models.data.CustomerRepository;
 import org.spmin.customerrewards.models.data.TransactionRepository;
 import org.spmin.customerrewards.services.PointsService;
@@ -35,11 +36,9 @@ public class CustomerController {
     public ResponseEntity<?> postCustomers(@RequestBody List<Customer> customers) {
 
 
-        // TODO: Verification here
-
         // TODO: put this into a service class
         for (Customer customer : customers) {
-            customer.setRewardsPoints(PointsService.calculatePoints(customer));
+            PointsService.calculateCustomerPoints(customer);
             customerRepository.save(customer);
         }
 
