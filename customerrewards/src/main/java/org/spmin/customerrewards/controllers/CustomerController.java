@@ -39,6 +39,7 @@ public class CustomerController {
         // TODO: put this into a service class
         for (Customer customer : customers) {
             PointsService.calculateCustomerPoints(customer);
+            customerRepository.save(customer);
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);

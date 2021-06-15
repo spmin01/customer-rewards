@@ -19,6 +19,8 @@ class GenerateData extends React.Component {
             customerList.push(generateCustomer());
         }
 
+        console.log(customerList);
+
         fetch("http://localhost:8080/api/customer", {
             method: 'POST',
             headers: {
