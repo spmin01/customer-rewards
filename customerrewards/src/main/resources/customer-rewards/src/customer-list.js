@@ -31,12 +31,10 @@ class CustomerList extends React.Component {
                         // convert primitave date strings into javascript date objects for easier comparison
                         for(let i = 0; i < obj.transactions.length; i++) {
                             let date = new Date(obj.transactions[i].transactionDate);
-                            console.log(date.getMonth());
                             obj.transactions[i].transactionDate = date;
                         }
 
                         customerList.push(obj);
-                        console.log(obj.transactions);
                     });
 
 

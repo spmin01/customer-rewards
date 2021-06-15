@@ -70,7 +70,7 @@ function generateCustomer() {
 
 function generateTransaction() {
     let transactionAmount = faker.finance.amount(25, 300, 2);
-    let transactionDate = faker.date.recent(120);
+    let transactionDate = faker.date.recent(120); // TODO: refactor this to only last 3 months worth. Apr 1st 2021 thru today
 
     return {
         transactionAmount: transactionAmount,

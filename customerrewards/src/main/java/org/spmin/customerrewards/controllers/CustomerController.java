@@ -22,12 +22,10 @@ public class CustomerController {
 
     @Autowired
     TransactionRepository transactionRepository;
-
+    
 
     @GetMapping
     public ResponseEntity<?> getCustomers() {
-
-        //TODO: this doesn't need to return everything, just firstName, lastName, id
         return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
     }
 
@@ -35,8 +33,6 @@ public class CustomerController {
     @PostMapping()
     public ResponseEntity<?> postCustomers(@RequestBody List<Customer> customers) {
 
-
-        // TODO: put this into a service class
         for (Customer customer : customers) {
             PointsService.calculateCustomerPoints(customer);
             customerRepository.save(customer);

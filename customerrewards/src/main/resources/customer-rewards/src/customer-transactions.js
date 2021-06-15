@@ -35,10 +35,12 @@ class CustomerTransactions extends React.Component {
         this.getLastThreeMonths();
     }
 
+    // TODO: generate last 3 months of transactions
     getLastThreeMonths() {
         let currentDate = new Date(); // gets current date in json format
-        let currentMonth = Number(currentDate.getMonth()) + 1;
-        console.log(currentMonth);
+        let currentMonth = Number(currentDate.getMonth());
+        
+
     }
 
 
@@ -51,6 +53,8 @@ class CustomerTransactions extends React.Component {
             detailsText = <button onClick={this.handleClick}>View details?</button>;
         }
         else {
+            // TODO: Format this as a table
+            // TODO: add form to generate new transaction
             detailsText = (<div>
                 <button onClick={this.handleClick}>Hide details?</button>
                 <ul>
