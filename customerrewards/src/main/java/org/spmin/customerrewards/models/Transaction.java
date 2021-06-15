@@ -17,6 +17,13 @@ public class Transaction extends AbstractEntity {
     @JsonBackReference
     private Customer customer;
 
+    public Transaction() {}
+
+    // constructor used for tests only
+    public Transaction(double transactionAmount) {
+        this.transactionAmount = transactionAmount;
+    }
+
     public double getTransactionAmount() {
         return transactionAmount;
     }
