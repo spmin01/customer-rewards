@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import DataGenerator from './data-generator';
+import DataGenerator from './data-generator'
+import CustomerTransactions from './customer-transactions'
+
 
 
 class CustomerList extends React.Component {
@@ -19,10 +21,30 @@ class CustomerList extends React.Component {
             .then(
                 (result) => {
 
+                    console.log(result); // debug
+
+                    let customerList = [];
+
+                    // convert each json entry into an object and store
+                    result.forEach(obj => {
+
+                        // convert primitave date strings into javascript date objects for easier comparison
+                        for(let i = 0; i < obj.transactions.length; i++) {
+                            let date = new Date(obj.transactions[i].transactionDate);
+                            console.log(date.getMonth());
+                            obj.transactions[i].transactionDate = date;
+                        }
+
+                        customerList.push(obj);
+                        console.log(obj.transactions);
+                    });
+
+
                     this.setState({
                         isLoaded: true,
-                        customers: result
+                        customers: customerList
                     });
+
 
                 },
                 (error) => {
@@ -36,6 +58,7 @@ class CustomerList extends React.Component {
 
     render() {
         const { error, isLoaded, customers } = this.state;
+
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -51,7 +74,7 @@ class CustomerList extends React.Component {
                 <ul>
                     {customers.map(customer => (
                         <li key={customer.id}>
-                            {customer.firstName} {customer.lastName} Points: {customer.rewardsPoints}
+                            {customer.firstName} {customer.lastName} Points: {customer.rewardsPoints} <CustomerTransactions transactions={customer.transactions} />
                         </li>
                     ))}
                 </ul>

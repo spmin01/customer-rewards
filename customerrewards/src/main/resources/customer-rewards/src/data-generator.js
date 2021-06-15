@@ -69,8 +69,8 @@ function generateCustomer() {
 }
 
 function generateTransaction() {
-    let transactionAmount = faker.finance.amount();
-    let transactionDate = faker.date.recent(90);
+    let transactionAmount = faker.finance.amount(25, 300, 2);
+    let transactionDate = faker.date.recent(120);
 
     return {
         transactionAmount: transactionAmount,
