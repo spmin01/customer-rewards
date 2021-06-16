@@ -59,6 +59,17 @@ function generateCustomer() {
     for (let i = 0; i < numTransactions; i++) {
         transactions.push(generateTransaction());
     }
+    
+    
+    transactions.sort((a, b) => {
+        if (a.transactionDate > b.transactionDate) {
+            return 1
+        } else if (a.transactionDate < b.transactionDate) {
+            return -1;
+        } else {
+            return 0;
+        }
+    });
 
 
     return {
