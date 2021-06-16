@@ -13,7 +13,7 @@ class CustomerList extends React.Component {
             isLoaded: false,
             customers: [],
             isTransactionView: false,
-            transactionsToView: null
+            customerToView: null
         }
 
         this.handleClick = this.handleClick.bind(this);
@@ -36,7 +36,7 @@ class CustomerList extends React.Component {
                         // convert primitave date strings into javascript date objects for easier comparison
                         for (let i = 0; i < obj.transactions.length; i++) {
                             let date = new Date(obj.transactions[i].transactionDate);
-                            obj.transactions[i].transactionDate = date.toJSON();
+                            obj.transactions[i].transactionDate = date;
                         }
 
                         customerList.push(obj);
@@ -59,17 +59,17 @@ class CustomerList extends React.Component {
             )
     }
 
-    handleClick(customerTransactions) {
+    handleClick(customer) {
 
         if (this.state.isTransactionView) {
             this.setState(prevState => ({
                 isTransactionView: !prevState.isTransactionView,
-                transactionsToView: null
+                customerToView: null
             }));
         } else {
             this.setState(prevState => ({
                 isTransactionView: !prevState.isTransactionView,
-                transactionsToView: customerTransactions
+                customerToView: customer
             }));
         }
 
@@ -107,7 +107,7 @@ class CustomerList extends React.Component {
                                 <td>{customer.id}</td>
                                 <td>{customer.firstName} {customer.lastName}</td>
                                 <td>Points: {customer.rewardsPoints}</td>
-                                <td><button onClick={this.handleClick.bind(this, customer.transactions)}>View details?</button></td>
+                                <td><button onClick={this.handleClick.bind(this, customer)}>View details?</button></td>
                             </tr>
                         ))}
                     </table>
@@ -115,7 +115,12 @@ class CustomerList extends React.Component {
             }
 
         } else {
-            return <CustomerTransactions  transactions = {this.state.transactionsToView} handler = {this.handleClick} />
+            return (<div>
+                <h3>{this.state.customerToView.firstName} {this.state.customerToView.lastName}</h3>
+                <p>Rewards Points: {this.state.customerToView.rewardsPoints}</p>
+                <CustomerTransactions transactions={this.state.customerToView.transactions} handler={this.handleClick} />
+            </div>)
+            
         }
 
     }
