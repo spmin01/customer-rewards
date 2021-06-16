@@ -29,6 +29,12 @@ public class PointsServiceTest {
         customer.setTransactions(transactionList);
     }
 
+    // Case 0: transaction amount less than $50, expected value 0
+    @Test
+    public void pointsCalcLessThanFifty() {
+        assertEquals(0, PointsService.calculateTransactionPoints(40));
+    }
+
     // Case 1: transaction amount exactly $50, expected value 0
     @Test
     public void pointsCalcFifty() {
