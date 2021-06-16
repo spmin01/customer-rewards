@@ -83,7 +83,8 @@ function generateTransaction() {
 
     let currentDate = new Date();
     let transactionAmount = faker.finance.amount(25, 300, 2);
-    let transactionDate = faker.date.between(new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 1), currentDate); 
+    let transactionDate = faker.date.between(new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 1), currentDate); // modify here to give wider transaction range
+
 
     return {
         transactionAmount: transactionAmount,

@@ -26,8 +26,6 @@ class CustomerList extends React.Component {
             .then(
                 (result) => {
 
-                    console.log(result); // debug
-
                     let customerList = [];
 
                     // convert each json entry into an object and store
@@ -72,11 +70,6 @@ class CustomerList extends React.Component {
                 customerToView: customer
             }));
         }
-
-
-
-        console.log("event handler");
-        console.log(this.state);
 
     }
 
