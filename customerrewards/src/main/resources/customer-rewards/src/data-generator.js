@@ -59,6 +59,17 @@ function generateCustomer() {
     for (let i = 0; i < numTransactions; i++) {
         transactions.push(generateTransaction());
     }
+    
+    
+    transactions.sort((a, b) => {
+        if (a.transactionDate > b.transactionDate) {
+            return 1
+        } else if (a.transactionDate < b.transactionDate) {
+            return -1;
+        } else {
+            return 0;
+        }
+    });
 
 
     return {
@@ -69,8 +80,10 @@ function generateCustomer() {
 }
 
 function generateTransaction() {
-    let transactionAmount = faker.finance.amount();
-    let transactionDate = faker.date.recent(90);
+
+    let currentDate = new Date();
+    let transactionAmount = faker.finance.amount(25, 300, 2);
+    let transactionDate = faker.date.between(new Date(currentDate.getFullYear(), currentDate.getMonth() - 2, 1), currentDate); 
 
     return {
         transactionAmount: transactionAmount,

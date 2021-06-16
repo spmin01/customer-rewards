@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+td {
+  padding: 8px;
+}
+
+td, th {
+  text-align: left;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+  color: black;
+}
