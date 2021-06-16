@@ -83,7 +83,6 @@ class CustomerTransactions extends React.Component {
 
         let detailsText;
 
-        // TODO: add form to generate new transaction
         detailsText = (<div>
             <button onClick={this.props.handler}>Hide details?</button>
             <table>
